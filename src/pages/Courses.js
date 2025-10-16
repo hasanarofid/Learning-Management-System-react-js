@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiSearch, FiFilter, FiClock, FiStar, FiUsers, FiPlay, FiBookOpen } from 'react-icons/fi';
-import axios from 'axios';
+import api from '../utils/api';
 import './Courses.css';
 
 const Courses = () => {
@@ -17,7 +17,7 @@ const Courses = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('/api/courses');
+      const response = await api.get('/api/courses');
       setCourses(response.data);
     } catch (error) {
       console.error('Error fetching courses:', error);

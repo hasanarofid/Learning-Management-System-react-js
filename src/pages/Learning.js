@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FiPlay, FiCheck, FiClock, FiBookOpen, FiAward, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import axios from 'axios';
+import api from '../utils/api';
 import './Learning.css';
 
 const Learning = () => {
@@ -19,8 +19,8 @@ const Learning = () => {
   const fetchCourseData = async () => {
     try {
       const [courseResponse, lessonsResponse] = await Promise.all([
-        axios.get(`/api/courses/${courseId}`),
-        axios.get(`/api/courses/${courseId}/lessons`)
+        api.get(`/api/courses/${courseId}`),
+        api.get(`/api/courses/${courseId}/lessons`)
       ]);
       
       setCourse(courseResponse.data);

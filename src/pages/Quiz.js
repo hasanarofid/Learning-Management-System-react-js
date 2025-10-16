@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FiCheck, FiClock, FiArrowLeft, FiArrowRight, FiAward, FiRefreshCw } from 'react-icons/fi';
-import axios from 'axios';
+import api from '../utils/api';
 import './Quiz.css';
 
 const Quiz = () => {
@@ -31,7 +31,7 @@ const Quiz = () => {
 
   const fetchQuiz = async () => {
     try {
-      const response = await axios.get(`/api/quizzes/${quizId}`);
+      const response = await api.get(`/api/quizzes/${quizId}`);
       setQuiz(response.data);
       setQuestions(response.data.questions || []);
       setTimeLeft(response.data.time_limit_minutes * 60);
@@ -67,7 +67,7 @@ const Quiz = () => {
     setSubmitting(true);
     try {
       const timeTaken = Math.floor((quiz.time_limit_minutes * 60 - timeLeft) / 60);
-      const response = await axios.post('/api/quiz-attempts', {
+      const response = await api.post('/api/quiz-attempts', {
         quiz_id: quizId,
         answers,
         time_taken_minutes: timeTaken
